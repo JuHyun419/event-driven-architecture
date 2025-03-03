@@ -3,8 +3,9 @@ plugins {
 }
 rootProject.name = "eda"
 
+include("adapter")
 include("api")
+include("common")
 include("domain")
 include("usecase")
-include("adapter")
-include("common")
+include("usecase:post-usecase")
