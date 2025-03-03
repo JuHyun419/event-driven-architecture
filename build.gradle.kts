@@ -33,9 +33,6 @@ subprojects {
     dependencies {
 //        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-        // junit
-        testImplementation("org.junit.jupiter:junit-jupiter")
     }
 
     tasks {
