@@ -1,21 +1,9 @@
-plugins {
-    kotlin("jvm")
-}
-
-group = "jh"
-version = "0.0.1-SNAPSHOT"
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    testImplementation(kotlin("test"))
-}
+    implementation("org.springframework.boot:spring-boot-starter:3.4.3")
+    implementation("org.springframework.boot:spring-boot-starter-web:3.4.3")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 
-tasks.test {
-    useJUnitPlatform()
-}
-kotlin {
-    jvmToolchain(21)
+    implementation(project(":common"))
+    implementation(project(":domain"))
+    implementation(project(":usecase:post-usecase"))
 }
