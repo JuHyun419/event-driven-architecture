@@ -64,7 +64,7 @@ class PostControllerV1(
                 content = request.content,
                 categoryId = request.categoryId,
             )
-        )
+        ) ?: return ResponseEntity.notFound().build()
 
         return ResponseEntity.ok().body(toDto(post))
     }
