@@ -4,7 +4,7 @@ import jh.post.model.Post
 
 interface PostUpdateUseCase {
 
-    fun update(request: UpdateRequest): Post
+    fun update(request: UpdateRequest): Post?
 
     data class UpdateRequest(
         val postId: Long,
