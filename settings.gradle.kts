@@ -3,9 +3,15 @@ plugins {
 }
 rootProject.name = "eda"
 
-include("adapter")
 include("api")
 include("common")
 include("domain")
+
 include("usecase")
+include("usecase:core")
 include("usecase:post-usecase")
+include("usecase:post-resolving-helper-usecase")
+
+include("adapter")
+include("adapter:metadata-client")
+include("adapter:mysql")
