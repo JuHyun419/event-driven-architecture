@@ -19,8 +19,7 @@ class ChatGptClient(
 ) {
 
     // https://platform.openai.com/docs/api-reference/chat/create
-    fun testChatGpt(content: String): String {
-        println("openaiApiKey: $openaiApiKey ::::::::::::::::::::")
+    fun getContentInspectionResult(content: String, chatPolicy: ChatPolicy): String {
 
         val jsonString = chatGptWebClient
             .post()
@@ -31,7 +30,9 @@ class ChatGptClient(
                 mapOf(
                     "model" to TARGET_GPT_MODEL,
                     "messages" to listOf(
-                        mapOf("role" to "system", "content" to "You are an assistant."),
+                        mapOf("role" to "system", "content" to chatPolicy.instruction),
+                        mapOf("role" to "user", "content" to chatPolicy.exampleContent),
+                        mapOf("role" to "assistant", "content" to chatPolicy.exampleInspectionResult),
                         mapOf("role" to "user", "content" to content)
                     ),
                     "stream" to false
@@ -50,4 +51,10 @@ class ChatGptClient(
         // https://platform.openai.com/docs/models/gpt-4o-mini
         private const val TARGET_GPT_MODEL = "gpt-4o-mini"
     }
+
+    data class ChatPolicy(
+        val instruction: String,
+        val exampleContent: String,
+        val exampleInspectionResult: String
+    )
 }
