@@ -8,7 +8,9 @@ dependencies {
     implementation(project(":domain"))
 
     implementation(project(":usecase:post-usecase"))
+    implementation(project(":usecase:core"))
 
     implementation(project(":adapter:mysql"))
     implementation(project(":adapter:kafka"))
+    implementation(project(":adapter:chat-gpt-client"))
 }
