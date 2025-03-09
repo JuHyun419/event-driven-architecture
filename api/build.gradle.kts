@@ -10,4 +10,5 @@ dependencies {
     implementation(project(":usecase:post-usecase"))
 
     implementation(project(":adapter:mysql"))
+    implementation(project(":adapter:kafka"))
 }

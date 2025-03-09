@@ -5,7 +5,8 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class PostDeleteService(
-    private val postPort: PostPort
+    private val postPort: PostPort,
+    private val messageProducePort: OriginalPostMessageProducePort
 ) : PostDeleteUseCase {
 
     @Transactional
@@ -14,6 +15,8 @@ class PostDeleteService(
 
         post.delete()
 
-//        val savedPost = postPort.save(post)
+        val deletedPost = postPort.save(post) // soft delete
+
+        messageProducePort.sendDeleteMessage(deletedPost.id!!)
     }
 }

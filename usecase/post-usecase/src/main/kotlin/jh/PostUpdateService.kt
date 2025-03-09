@@ -6,7 +6,8 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class PostUpdateService(
-    private val postPort: PostPort
+    private val postPort: PostPort,
+    private val messageProducePort: OriginalPostMessageProducePort
 ) : PostUpdateUseCase {
 
     @Transactional
@@ -16,6 +17,8 @@ class PostUpdateService(
         post.update(request.title, request.content, request.categoryId)
 
         val savedPost = postPort.save(post)
+
+        messageProducePort.sendCreateMessage(savedPost)
 
         return savedPost
     }

@@ -1,21 +1,8 @@
 plugins {
-    kotlin("jvm")
-}
-
-group = "jh"
-version = "0.0.1-SNAPSHOT"
-
-repositories {
-    mavenCentral()
+    id("java-library")
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-kotlin {
-    jvmToolchain(21)
+    api("com.fasterxml.jackson.core:jackson-databind:2.15.0")
+    api("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3")
 }
