@@ -1,4 +1,4 @@
-package jh.post
+package jh.originalpost
 
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.ObjectMapper

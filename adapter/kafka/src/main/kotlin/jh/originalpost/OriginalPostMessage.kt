@@ -1,4 +1,4 @@
-package jh.post
+package jh.originalpost
 
 import jh.common.OperationType
 import java.time.LocalDateTime
