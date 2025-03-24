@@ -8,3 +8,7 @@
 - 검색을 통해 콘텐츠를 찾을 수 있다.
 
 ![img.png](img.png)
+
+### References
+- https://platform.openai.com/docs/api-reference/
+- https://platform.openai.com/docs/models
