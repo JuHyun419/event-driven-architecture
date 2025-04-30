@@ -15,7 +15,7 @@ import java.time.LocalDateTime
     "read": false
 }
  */
-@Document(collation = "subscribingInboxPosts")
+@Document(collection = "subscribingInboxPosts")
 class SubscribingPostDocument(
     @Id
     val id: String, // postId와 followerUserId의 조합

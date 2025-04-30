@@ -12,6 +12,7 @@ include("usecase:core")
 include("usecase:post-usecase")
 include("usecase:post-resolving-helper-usecase")
 include("usecase:post-inspected-usecase")
+include("usecase:subscribing-post-usecase")
 
 include("adapter")
 include("adapter:metadata-client")
