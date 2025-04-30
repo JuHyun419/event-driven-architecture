@@ -18,6 +18,9 @@ include("adapter:metadata-client")
 include("adapter:mysql")
 include("adapter:kafka")
 include("adapter:chat-gpt-client")
+include("adapter:postgresql")
+
 include("worker")
 include("worker:auto-inspection-worker")
-include("adapter:postgresql")
+
+include("adapter:mongodb")
