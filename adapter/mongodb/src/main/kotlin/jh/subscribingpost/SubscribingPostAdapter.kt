@@ -21,6 +21,10 @@ class SubscribingPostAdapter(
         repository.saveAll(documents)
     }
 
+    override fun removePostFromFollowerInboxes(postId: Long) {
+        repository.deleteAllByPostId(postId)
+    }
+
     // 특정 구독자의 구독목록 화면에서 구독하고 있는 유저가 생성한 콘텐츠 목록을 본다.
     override fun getPostIdsByFollowerUserIdWithPagination(
         followerUserId: Long,

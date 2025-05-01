@@ -40,6 +40,8 @@ class SubscribingPostRepositoryImpl(
     }
 
     override fun deleteAllByPostId(postId: Long) {
-        TODO("Not yet implemented")
+        val query = Query().addCriteria(Criteria.where("postId").`is`(postId))
+
+        mongoTemplate.remove(query, SubscribingPostDocument::class.java)
     }
 }

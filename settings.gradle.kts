@@ -23,5 +23,6 @@ include("adapter:postgresql")
 
 include("worker")
 include("worker:auto-inspection-worker")
+include("worker:content-subscribing-worker")
 
 include("adapter:mongodb")

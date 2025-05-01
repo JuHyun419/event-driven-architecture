@@ -7,7 +7,7 @@ import jakarta.persistence.Id
 import java.time.LocalDateTime
 
 @Entity(name = "post")
-class PostEntity(
+open class PostEntity(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

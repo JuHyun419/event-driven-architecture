@@ -7,6 +7,12 @@
 - 카테고리를 통해 콘텐츠 분류가 가능하다.
 - 검색을 통해 콘텐츠를 찾을 수 있다.
 
+### 링크
+- [API Swagger](http://localhost:8080/swagger-ui/index.html)
+- [메타정보 (외부 API) Swagger](http://localhost:8088/swagger-ui/index.html)
+- [Kafka UI](http://localhost:8089/)
+- [ES DevTools](http://localhost:5601)
+
 ![img.png](img.png)
 
 ### References

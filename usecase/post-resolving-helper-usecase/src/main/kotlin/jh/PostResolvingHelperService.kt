@@ -18,12 +18,10 @@ class PostResolvingHelperService(
             val userName = metadataPort.getUserNameByUserId(post.userId)
             val categoryName = metadataPort.getCategoryNameByCategoryId(post.categoryId)
 
-            if (userName != null && categoryName != null) {
-                resolvedPost = ResolvedPost.generate(post, userName, categoryName)
-            }
+            resolvedPost = ResolvedPost.generate(post, userName, categoryName)
         }
 
-        TODO()
+        return resolvedPost!!
     }
 
     override fun resolvePostsByIds(postIds: List<Long>): List<ResolvedPost> {
