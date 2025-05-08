@@ -20,9 +20,9 @@ include("adapter:mysql")
 include("adapter:kafka")
 include("adapter:chat-gpt-client")
 include("adapter:postgresql")
+include("adapter:mongodb")
+include("adapter:redis")
 
 include("worker")
 include("worker:auto-inspection-worker")
 include("worker:content-subscribing-worker")
-
-include("adapter:mongodb")

@@ -7,21 +7,21 @@ import org.springframework.stereotype.Service
 class PostResolvingHelperService(
     private val metadataPort: MetadataPort,
     private val postPort: PostPort,
+    private val resolvedPostCachePort: ResolvedPostCachePort,
 ) : PostResolvingHelperUseCase {
 
     override fun resolvePostById(postId: Long): ResolvedPost {
-        var resolvedPost: ResolvedPost? = null
+        resolvedPostCachePort.get(postId)?.let { return it }
 
         val post = postPort.findById(postId)
+            ?: throw IllegalArgumentException("Post id: $postId not found")
 
-        if (post != null) {
-            val userName = metadataPort.getUserNameByUserId(post.userId)
-            val categoryName = metadataPort.getCategoryNameByCategoryId(post.categoryId)
+        val userName = metadataPort.getUserNameByUserId(post.userId)
+        val categoryName = metadataPort.getCategoryNameByCategoryId(post.categoryId)
 
-            resolvedPost = ResolvedPost.generate(post, userName, categoryName)
-        }
-
-        return resolvedPost!!
+        return ResolvedPost
+            .generate(post, userName, categoryName)
+            .also { resolvedPostCachePort.set(it) }
     }
 
     override fun resolvePostsByIds(postIds: List<Long>): List<ResolvedPost> {
