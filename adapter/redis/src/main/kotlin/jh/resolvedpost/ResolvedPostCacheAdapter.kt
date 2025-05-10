@@ -24,6 +24,15 @@ class ResolvedPostCacheAdapter(
         }
     }
 
+    override fun multiGet(postIds: List<Long>): List<ResolvedPost> {
+        val jsonStrings = redisTemplate
+            .opsForValue()
+            .multiGet(postIds.map { key(it) })
+            ?: return emptyList()
+
+        return jsonStrings.filterNotNull().map { json -> objectMapper.readValue(json, ResolvedPost::class.java) }
+    }
+
     override fun set(resolvedPost: ResolvedPost) {
         var jsonString: String
 

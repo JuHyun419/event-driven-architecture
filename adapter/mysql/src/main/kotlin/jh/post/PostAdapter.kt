@@ -20,4 +20,10 @@ class PostAdapter(
 
         return PostEntityConverter.toModel(postEntity)
     }
+
+    override fun findByIds(ids: List<Long>): List<Post> {
+        val postEntities = repository.findAllById(ids)
+
+        return postEntities.map { PostEntityConverter.toModel(it) }
+    }
 }

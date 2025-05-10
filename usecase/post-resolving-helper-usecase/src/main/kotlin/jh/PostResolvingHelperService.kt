@@ -21,7 +21,19 @@ class PostResolvingHelperService(
     }
 
     override fun resolvePostsByIds(postIds: List<Long>): List<ResolvedPost> {
-        return postIds.map { resolvePostById(it) }.toList()
+        val resolvedPostCaches = resolvedPostCachePort.multiGet(postIds).toMutableList()
+        val cachedPostIds = resolvedPostCaches.map { it.id }.toSet().toSet()
+
+        // 캐시에 존재하지 않는 게시글 Ids
+        val missingPostIds = postIds.filterNot { cachedPostIds.contains(it) }
+        val missingResolvedPosts = postPort.findByIds(missingPostIds).map { resolvedPost(it) }
+
+        resolvedPostCaches += missingResolvedPosts
+
+        val resolvedPostMap = resolvedPostCaches.associateBy { it.id }
+
+        // 요청한 postIds 의 게시글 순서대로 반환
+        return postIds.mapNotNull { resolvedPostMap[it] }
     }
 
     override fun resolvePostAndSave(post: Post) {
