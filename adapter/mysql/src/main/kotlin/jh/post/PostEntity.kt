@@ -7,7 +7,7 @@ import jakarta.persistence.Id
 import java.time.LocalDateTime
 
 @Entity(name = "post")
-open class PostEntity(
+class PostEntity(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,5 +18,5 @@ open class PostEntity(
     val categoryId: Long,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime,
-    val deletedAt: LocalDateTime? = null
+    val deletedAt: LocalDateTime? = null,
 )

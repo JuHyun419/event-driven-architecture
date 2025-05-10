@@ -40,10 +40,14 @@ class ResolvedPostCacheAdapter(
         )
     }
 
+    override fun delete(postId: Long) {
+        redisTemplate.delete(key(postId))
+    }
+
     private fun key(postId: Long) = "${KEY_PREFIX}$postId"
 
     companion object {
         private const val KEY_PREFIX = "resolved_post_v1:"
-        private const val EXPIRE_SECONDS = 60L * 60L * 2L // 2시간
+        private const val EXPIRE_SECONDS = 60L * 60L * 24 * 7L // 1주일
     }
 }
