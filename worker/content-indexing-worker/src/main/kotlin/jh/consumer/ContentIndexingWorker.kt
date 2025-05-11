@@ -1,8 +1,7 @@
 package jh.consumer
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import jh.SubscribingPostAddToInboxUseCase
-import jh.SubscribingPostRemoveFromInboxUseCase
+import jh.PostIndexingUseCase
 import jh.common.OperationType
 import jh.common.Topic
 import jh.inspectedpost.InspectPostMessage
@@ -11,15 +10,14 @@ import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 
 @Component
-class ContentSubscribingWorker(
+class ContentIndexingWorker(
     private val objectMapper: ObjectMapper,
-    private val subscribingPostAddToInboxUseCase: SubscribingPostAddToInboxUseCase,
-    private val subscribingPostRemoveFromInboxUseCase: SubscribingPostRemoveFromInboxUseCase,
+    private val postIndexingUseCase: PostIndexingUseCase,
 ) {
 
     @KafkaListener(
         topics = [Topic.INSPECTED_TOPIC],
-        groupId = "subscribing-post-consumer-group",
+        groupId = "indexing-post-consumer-group",
         concurrency = "3"
     )
     fun listen(message: ConsumerRecord<String, String>) {
@@ -33,10 +31,10 @@ class ContentSubscribingWorker(
     }
 
     private fun handleCreate(inspectedPostMessage: InspectPostMessage) {
-        subscribingPostAddToInboxUseCase.saveSubscribingInboxPost(inspectedPostMessage.payload!!.post)
+        postIndexingUseCase.save(inspectedPostMessage.toModel())
     }
 
     private fun handleDelete(inspectedPostMessage: InspectPostMessage) {
-        subscribingPostRemoveFromInboxUseCase.deleteSubscribingInboxPost(inspectedPostMessage.id)
+        postIndexingUseCase.delete(inspectedPostMessage.id)
     }
 }
