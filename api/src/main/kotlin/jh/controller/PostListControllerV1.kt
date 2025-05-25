@@ -1,5 +1,6 @@
 package jh.controller
 
+import jh.PostSearchUseCase
 import jh.SubscribingPostListUseCase
 import jh.dto.PostListResponse
 import jh.post.model.ResolvedPost
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/v1/posts/list")
 class PostListControllerV1(
     private val subscribingPostListUseCase: SubscribingPostListUseCase,
+    private val postSearchUseCase: PostSearchUseCase,
 ) {
 
     @GetMapping("/inbox/{userId}")
@@ -29,8 +31,13 @@ class PostListControllerV1(
     }
 
     @GetMapping("/search")
-    fun search(@RequestParam("query") query: String): ResponseEntity<List<PostListResponse>> {
-        return ResponseEntity.internalServerError().build()
+    fun search(
+        @RequestParam("keyword") keyword: String,
+        @RequestParam("page", defaultValue = "0", required = false) page: Int,
+    ): ResponseEntity<List<PostListResponse>> {
+        val searchedPosts = postSearchUseCase.getSearchResultByKeyword(keyword, page)
+
+        return ResponseEntity.ok().body(searchedPosts.map { it -> toDto(it) })
     }
 
     private fun toDto(resolvedPost: ResolvedPost): PostListResponse {

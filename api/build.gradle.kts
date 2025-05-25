@@ -11,10 +11,12 @@ dependencies {
     implementation(project(":usecase:post-inspected-usecase"))
     implementation(project(":usecase:subscribing-post-usecase"))
     implementation(project(":usecase:post-usecase"))
+    implementation(project(":usecase:indexing-post-usecase"))
 
     implementation(project(":adapter:mysql"))
     implementation(project(":adapter:mongodb"))
     implementation(project(":adapter:redis"))
     implementation(project(":adapter:kafka"))
+    implementation(project(":adapter:elasticsearch"))
     implementation(project(":adapter:chat-gpt-client"))
 }
